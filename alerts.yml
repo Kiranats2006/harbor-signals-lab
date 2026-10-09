@@ -2,9 +2,9 @@ groups:
   - name: harbor
     rules:
       - alert: HighErrorRate
-        expr: up == 0
-        for: 30m
+        expr: rate(checkout_errors_total[1m]) > 0.1
+        for: 1m
         labels:
-          severity: info
+          severity: warning
         annotations:
-          summary: placeholder rule
+          summary: "checkout error"
